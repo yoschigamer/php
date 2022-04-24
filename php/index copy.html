@@ -1,0 +1,111 @@
+<?php require("actions/Users/SecurityAction.php"); ?>
+<?php echo "" . $_SESSION['username'] . ""; ?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Document</title>
+</head>
+
+<body>
+    <section class="navbar_contaigner">
+            <h1 style="margin-right: 40px;">identifiant</h1>
+            <a href="actions/Users/LogoutAction.php" style="display: flex; justify-content: center; align-items: center;">Se déconnecter ?</a>
+    </section>
+    <section>
+        <article class="contaigner_infos_verre" style="width: 500px; height: 500px; background-color: rgb(0, 115, 255); border-radius: 20px; margin: 10px;">
+            <article class="infos_verre" style="display: flex; justify-content: center; position: relative; top: 20px;">
+                <div id="15">1.5</div>
+                <div id="16">1.6</div>
+                <div id="17">1.67</div>
+                <div id="poly">POLY</div>
+                <div id="1.74">1.74</div>
+            </article>
+            <div class="arrow" style="transition: all 0.3s; width: 20px; height: 20px; position: relative; left: 60px; top: 4px; transform: rotate(45deg); background-color: rgb(0, 115, 255); border-radius: 3px;"></div>
+            <p class="é" style="padding: 20px; color: white; font-size: 20px; font-family: 'Courier New', Courier, monospace;"></p>
+        </article>
+    </section>
+</body>
+
+</html>
+
+<style>
+
+    article.infos_verre>* {
+        width: 50px;
+        display: flex;
+        margin: 10px;
+        justify-content: center;
+        padding: 10px;
+        border-radius: 10px;
+        font-family: Impact, Haettenschweiler, 'Bold', sans-serif ;
+        color: rgb(255, 255, 255);
+        background-color: rgb(20, 21, 24);
+    }
+    section.navbar_contaigner {
+        height: 50px;
+        display: flex;
+        align-items: center;
+        position: absolute;
+        background-color: rgba(255, 255, 255, 0.037);
+        padding: 5px;
+        left: 0%;
+        width: calc(100% - 10px);
+        display: flex;
+        justify-content: flex-end;
+        top: 0%;
+    }
+
+    h1 {
+        font-size: 1.5em;
+        font-weight: bold;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        color: rgb(0, 94, 255);
+    }
+
+    a {
+        font-family: 'Courier New', Courier, monospace;
+        background-color: rgb(0, 0, 0);
+        color: rgb(255, 255, 255);
+        text-decoration: none;
+        border-radius: 30px;
+        font-weight: bold;
+        font-size: 1em;
+        padding: 20px;
+        height: 0px;
+    }
+</style>
+
+<script>
+    document.getElementById("15").addEventListener("click", function() {
+        document.querySelector(".arrow").style.transform = "translate(0px, 0px) rotate(45deg)";
+        document.querySelector(".é").innerHTML  = "Les verres d’indice 1.50 sont les plus courants. Fabriqués en plastique organique CR39 ils conviennent aux petites corrections de l'ordre de ±2. Ce matériau n'étant pas très dur le montage de verres d'indice 1.50 sur des montures de type invisibles (percées) est fortement déconseillé car cela rendrait la lunette très fragile. Raison pour laquelle vous ne trouverez pas de verres 1.50 proposés sur les montures invisibles que nous vendons.";
+    });
+    document.getElementById("16").addEventListener("click", function() {
+        document.querySelector(".arrow").style.transform = "translate(90px, 0px) rotate(45deg)";
+        document.querySelector(".é").innerHTML  = "Les verres amincis en indice 1.60 sont fabriqués en plastique organique MR8. Ils conviennent parfaitement aux corrections moyennes de l'ordre de ±4. Ils sont compatibles avec tout type de montures, y compris les montures invisibles ou percées. Pour une correction donnée, les verres amincis d'indice 1.60 permettent un gain d'épaisseur d'environ 20% par rapport aux verres normaux d'indice 1.50.";
+
+    });
+    document.getElementById("17").addEventListener("click", function() {
+        document.querySelector(".arrow").style.transform = "translate(180px, 0px) rotate(45deg)";
+        document.querySelector(".é").innerHTML  = "Les verres très amincis d'indice 1.67 sont généralement fabriqués en plastique organique MR7 ou MR10. Ils conviennent particulièrement  aux corrections fortes de l'ordre de ±6. Ils sont compatibles avec tout type de montures, y compris les montures invisibles ou percées. Pour une correction donnée, les verres amincis d'indice 1.67 permettent un gain d'épaisseur d'environ 35% par rapport aux verres normaux d'indice 1.50.";
+
+    });
+    document.getElementById("poly").addEventListener("click", function() {
+        document.querySelector(".arrow").style.transform = "translate(270px, 0px) rotate(45deg)";
+        document.querySelector(".é").innerHTML  = "Le polycarbonate, Ce matériau de synthèse est incassable et plus léger que l’organique mais se raye encore plus facilement. Il est surtout recommandé pour les enfants ou pour certaines activités sportives. En revanche, il est fragile chimiquement et sa qualité optique n’est pas très bonne. De plus, comme son indice est unique (1.59), il ne peut pas être aminci.";
+
+    });
+    document.getElementById("1.74").addEventListener("click", function() {
+        document.querySelector(".arrow").style.transform = "translate(360px, 0px) rotate(45deg)";
+        document.querySelector(".é").innerHTML  = "1.74  : l’ultra mince, idéal pour les fortes amétropies. C’est le verre le plus cher : il est jusqu’à 50% plus mince qu’un indice 1.50 et il possède bien sûr lui aussi un filtre UV intégré.";
+
+    });
+</script>

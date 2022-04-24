@@ -1,0 +1,337 @@
+<?php require("actions/Users/SecurityAction.php"); ?>
+<?php echo "" . $_SESSION['username'] . ""; ?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Document</title>
+</head>
+
+<body>
+
+    <section class="contaigner">
+        <article class="contaigner_left">
+            <div style="display: flex;">
+                <input id="sph" class="champs" type="text" placeholder="sph">
+                <input id="cyl" class="champs" type="text" placeholder="cyl">
+                <input id="axe" class="champs" type="text" placeholder="axe">
+            </div>
+            <div style="display: flex;">
+                <input id="base" class="champs" type="text" placeholder="base">
+                <input id="n" class="champs" type="text" placeholder="n">
+                <input id="D" class="champs" type="text" placeholder="Ø">
+            </div>
+            <div style="display: flex; align-items: center;">
+                <input id="ebmin" class="champs" type="text" placeholder="eb">
+                <input id="ec" class="champs" type="text" placeholder="ec">
+                <button onclick="calcule()"></button>
+            </div>
+        </article>
+        <article id="result" type="text" style="display: flex; text-align: center;">
+        </article>
+    </section>
+</body>
+
+</html>
+
+<style>
+    body,
+    html {
+        height: 100%;
+    }
+
+    section.acceuille {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 40px;
+        width: 100%;
+        height: 100%;
+        background-color: #9932cc;
+    }
+
+    section.contaigner {
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        display: flex;
+    }
+
+    section.infos_contaigner {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(0deg, rgba(109, 0, 185, 1) 0%, rgba(49, 14, 77, 1) 51%, rgba(20, 21, 24, 1) 94%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    article.contaigner_left {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 300px;
+        height: 348px;
+        background-color: rgb(87, 3, 255);
+        border-radius: 50px 0 0 50px;
+        border: 1px solid rgb(255, 255, 255);
+        flex-wrap: wrap;
+        align-content: center;
+    }
+
+    article:nth-child(2) {
+        outline: none;
+        height: 350px;
+        width: 250px;
+
+        border: none;
+        background-color: rgb(255, 255, 255);
+        border-radius: 0 50px 50px 0;
+    }
+
+    input.champs {
+        outline: none !important;
+        color: rgb(255, 255, 255);
+        width: 70px;
+
+        height: 40px;
+        text-align: center;
+        border: none;
+        background-color: rgb(70, 0, 210);
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    article.contaigner_left>div:nth-child(1)>input:nth-child(1) {
+        border-radius: 50px 0 0 50px;
+    }
+
+    article.contaigner_left>div:nth-child(1)>input:nth-child(3) {
+        border-radius: 0 50px 50px 0;
+    }
+
+    article.contaigner_left>div:nth-child(2)>input:nth-child(1) {
+        border-radius: 50px 0 0 50px;
+    }
+
+    article.contaigner_left>div:nth-child(2)>input:nth-child(3) {
+        border-radius: 0 50px 50px 0;
+    }
+
+    article.contaigner_left>div:nth-child(3)>input:nth-child(1) {
+        border-radius: 50px 0 0 50px;
+    }
+
+    article.contaigner_left>div:nth-child(3)>input:nth-child(2) {
+        border-radius: 0 50px 50px 0;
+    }
+
+    article.contaigner_left>div:nth-child(3)>button:nth-child(3) {
+        border-radius: 50px;
+        border: none;
+        width: 60px;
+        margin: 5px;
+        height: 40px;
+    }
+
+    input.champs::placeholder {
+        color: rgb(255, 255, 255);
+    }
+
+    article>p.result {
+
+        padding: 10px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        color: rgb(0, 119, 255);
+    }
+</style>
+
+<script>
+    //Valeur à entrée -----------------------------------------
+    function calcule() {
+        result = document.getElementById("result");
+        sph = parseFloat(document.querySelector('#sph').value)
+        cyl = parseFloat(document.querySelector('#cyl').value)
+        axe = parseInt(document.querySelector('#axe').value)
+        n = parseFloat(document.querySelector('#n').value)
+        Ø = parseInt(document.querySelector('#D').value)
+        DE = parseFloat(document.querySelector('#base').value)
+        EBMIN = parseFloat(document.querySelector('#ebmin').value)
+        EC = parseFloat(document.querySelector('#ec').value)
+        R = Ø / 2
+
+        // Addition de la sphère avec le cylindre --------------------
+        res = sph + (cyl)
+        // ||do de Base ----------------------------------------------
+        a = (`Ordo:  ${sph} ( ${cyl} ) ${axe} °`)
+        // Changement de signe de DE ---------------------------------
+        cyl2 = cyl
+        cyl2 = cyl * -1
+        //transpo axe ------------------------------------------------
+        if (axe >= 90) {
+            res_axe = axe - 90
+        }
+        else {
+            res_axe = axe + 90
+        }
+
+        // ||do Transposée -------------------------------------------
+        aa = (`Ordo transposé: ${res} ( ${cyl2} ) ${res_axe} °`) //document.querySelector('#result').value = (`Ordo transposé: ${res} ( ${cyl2} ) ${res_axe} °`)
+        // Transpo cylindre ------------------------------------------
+        if (sph < res) {
+            DS = res + DE
+        }
+        else {
+            DS = sph + DE
+        }
+        //passage de DE au négatif -----------------------------------
+        DEé = -DE
+        de = (`DE = ${DEé}`)
+        // calcule DS ------------------------------------------------
+        DM = res - (DS)
+        dsm = (`DS = ${DS} \nDM = ${DM}`)
+        //S ----------------------------------------------------------
+        RS_m = (n - 1) / DS
+        RS_mm = RS_m * 1000
+        FS = RS_mm - Math.sqrt((RS_mm ** 2) - (R ** 2));
+        rs = (`RS en milimètre = ${RS_mm}`);
+        fs = (`fs = ` + ((FS)));
+        //E ----------------------------------------------------------
+        RE_m = (1 - n) / DEé;
+        RE_mm = RE_m * 1000;
+        FE = RE_mm - Math.sqrt(RE_mm ** 2 - R ** 2);
+        re = (`RE en milimètre = ${RE_mm}`);
+        fe = (`fe = ${FE}`);
+        //M ----------------------------------------------------------
+        RM_m = (1 - n) / DM;
+        RM_mm = RM_m * 1000;
+        FM = RM_mm - Math.sqrt(RM_mm ** 2 - R ** 2);
+        rm = (`RM en milimètre = ${RM_mm}`);
+        fm = (`fm = ${FM}`);
+
+        //``===``===``====``===``===``=
+        // EC =========================
+        if (EC != 0) {
+
+            EBMIN = (FE - FS) + EC
+            EBMAX = (FM - FE) + EBMIN
+            ec = (`EC = ${EC}`)
+            ebmin = (`ebmin = ${EBMIN}`)
+            ebmax = (`ebmax = ${EBMAX}`)
+        }
+        // EBMIN ======================
+        else if (EBMIN != 0) {
+            EC = (FS - FE) + EBMIN
+            EBMAX = (FM - FE) + EBMIN
+            console.log(`EC = ${EC}`)
+            ebmin = (`ebmin = ${EBMIN}`)
+            ebmax = (`ebmax = ${EBMAX}`)
+        }
+        // EBMAX ======================
+        //else if EBMAX != 0:
+        //EC = (ICI) + EBMAX ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //EBMIN = (FE - FS) + EC
+        //console.log(f`EC = {EC}`)
+        //console.log(f`ebmin = {EBMIN}`)
+        //console.log(f`ebmax = {EBMAX}`)
+        //``===``===``====``===``===``=
+
+        if (sph < 0 && res > 0 || sph > 0 && res < 0) {
+            qqq = (`Mixte`)
+        }
+        else if (sph > 0 && res == 0 || res > 0 && sph == 0) {
+            qqq = (`Hypermetropique - simple`)
+        }
+        else if (sph < 0 && res == 0 || res < 0 && sph == 0) {
+            qqq = (`Nyopique - simple`)
+        }
+        else if (sph > 0 && res > 0) {
+            qqq = (`Hypermetropique - Composé`)
+        }
+        else if (sph < 0 && res < 0) {
+            qqq = (`Nyopique - composé`)
+            console.console.log(qqq);
+        }
+
+        //{({({({({( H D V )})})})})}
+        if (cyl > cyl2) {
+            if (0 <= axe < 30) {
+                c = (`Horizontale - Inverse`)
+            }
+            else if (30 < axe < 60) {
+                c = (`Oblique`)
+            }
+            else if (60 < axe < 120) {
+                c = (`Verticale - Direct`)
+            }
+            else if (120 < axe < 150) {
+                c = (`Oblique`)
+            }
+            else if (150 < axe < 180)
+                c = (`Horizontale - Inverse`)
+        }
+        else if (cyl < cyl2) {
+            if (0 <= res_axe < 30) {
+                c = (`Horizontale - Inverse`)
+            }
+            else if (30 < res_axe < 60) {
+                c = (`Oblique`)
+            }
+            else if (60 < res_axe < 120) {
+                c = (`Verticale - Direct`)
+            }
+            else if (120 < res_axe < 150) {
+                c = (`Oblique`)
+            }
+            else if (150 < res_axe < 180) {
+                c = (`Horizontale - Inverse`)
+            }
+        }
+        //{({({({({( ----- )})})})})}
+
+        //++++++++++++++++++++++++++++- TYPE DE T||RE -+++++++++++++++++++++++++++++++
+        //============= T||RE en citrouille ==========================================
+        if (2 * RE_mm > RM_mm && RM_mm > RE_mm) {
+            torre = (`TORE en citrouille`)
+        }
+        else if (cyl < DE) {
+            torre = (`TORRE en citrouille par transposition`)
+        }
+        //============ T||RE en diabolo ==============================================
+        else if (RE_m == (RM_m) * -1) {
+            torre = (`TORRE en diabolo`)
+        }
+        //============ T||RE Limite anneau - citrouille ============================== MARCHE
+        else if (RE_m == (2 * RM_m)) {
+            torre = (`TORE Limite anneau - citrouille`)
+        }
+        else if (cyl == DE) {
+            torre = (`TORRE Limite anneau - citrouille par transposition`)
+        }
+        //============ T||RE en anneau================================================ MARCHE
+        else if (RE_m > (2 * RM_m)) {
+            torre = (`TORRE en anneau`)
+        }
+        else if (cyl > DE) {
+            torre = (`TORRE en anneau par transposition`)
+        }
+        // ============ T||RE en fuseau===============================================
+        else if (RE_m < RM_m) {
+            torre = (`TORRE en fuseau \n Partie centrale = TORRE en Tonneau`) //Y
+        }
+        // ============ Sphère========================================================
+        else if (RE_m == RM_m) {
+            torre = (`Sphère`)
+        }
+        result.innerHTML = (`<p style='color: rgb(0, 119, 255);'>${a}\n${aa}\n${dsm}\n${de}\n${rs}\n${rm}\n${re}\n${fs}\n${fm}\n${fe}\n${ec}\n${ebmin}\n${ebmax}\n${qqq}\n${c}\n${torre}</p>`)
+        // ===========================================================================
+        // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++�[
+    }
+</script>
